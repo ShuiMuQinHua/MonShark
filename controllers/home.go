@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	_ "strings"
 
@@ -61,4 +62,14 @@ func (this *HomeController) GetColsByDb(dbName string) []string {
 
 func (this *HomeController) GetDocByCol(colName string) {
 
+}
+
+func (this *HomeController) GetMongoInfo() {
+	// info := this.mgoSession.LiveServers() //获取mongodb服务器的地址
+	// infojson, _ := json.Marshal(info)
+	// this.Ctx.WriteString(string(infojson))
+
+	info, _ := this.mgoSession.BuildInfo() //可以获取到版本等信息
+	infojson, _ := json.Marshal(info)
+	this.Ctx.WriteString(string(infojson))
 }
